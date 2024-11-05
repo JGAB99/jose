@@ -1,0 +1,32 @@
+{% extends 'math_app/base.html' %}
+
+{% block content %}
+<div class="card">
+<div class="card-header">
+<h2>Resultado del Ejercicio</h2>
+</div>
+<div class="card-body">
+<p>Pregunta: {{ exercise.question }}</p>
+<p>Tu respuesta: {{ exercise.user_answer }}</p>
+<p>Respuesta correcta: {{ exercise.correct_answer }}</p>
+
+{% if exercise.is_correct %}
+    <div class="alert alert-success">¡Correcto!</div>
+{% else %}
+    <div class="alert alert-danger">Incorrecto</div>
+{% endif %}
+</div>
+</div>
+<br>
+<div class="card">
+    <div class="card-header">
+<h3>Explicación paso a paso:</h3>
+</div>
+<div class="card-body">
+<pre>{{ exercise.explanation }}</pre>
+</div>
+</div>
+<a href="{% url 'exercise' %}" class="btn btn-primary">Siguiente ejercicio</a>
+<a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
+
+{% endblock %}

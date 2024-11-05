@@ -1,0 +1,37 @@
+{% extends 'math_app/base.html' %}
+
+{% block content %}
+<div class="card" ">
+    <div class="card-header">
+<h2>Tabla de Líderes</h2>
+</div>
+<div class="card-body" > 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Usuario</th>
+            <th>Nivel</th>
+            <th>Experiencia</th>
+            <th>Puntuación Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in leaders %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.level }}</td>
+            <td>{{ user.experience }}</td>
+            <td>{{ user.total_score|default_if_none:0 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No hay datos disponibles.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock %}

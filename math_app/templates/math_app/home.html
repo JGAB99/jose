@@ -1,0 +1,12 @@
+{% extends 'math_app/base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido a Aprende Matemáticas</h1>
+    <p class="lead">Mejora tus habilidades matemáticas con ejercicios interactivos y divertidos.</p>
+    <hr class="my-4">
+    <p>Regístrate para comenzar tu viaje de aprendizaje o inicia sesión si ya tienes una cuenta.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Registrarse</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'login' %}" role="button">Iniciar Sesión</a>
+</div>
+{% endblock %}

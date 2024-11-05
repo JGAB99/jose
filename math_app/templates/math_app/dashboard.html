@@ -1,0 +1,46 @@
+{% extends 'math_app/base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+<h2>Dashboard de {{ user.username }}</h2>
+</div>
+<div class="card-body">
+<p>Nivel: {{ user.level }}</p>
+<p>Experiencia: {{ user.experience }} / {{ user.level|multiply:100 }}</p>
+<div class="progress mb-3">
+    <div class="progress-bar" role="progressbar" style="width: {% widthratio user.experience 100 user.level %}%" aria-valuenow="{{ user.experience }}" aria-valuemin="0" aria-valuemax="{{ user.level|multiply:100 }}"></div>
+</div>
+</div>
+</div>
+<br>
+<a href="{% url 'exercise' %}" class="btn btn-primary">Hacer un ejercicio</a>
+<a href="{% url 'practice_mode' %}" class="btn btn-secondary">Modo práctica</a><br>
+<br>
+<div class="card">
+    <div class="card-header">
+<h3 class="mt-4">Logros</h3>
+</div>
+<div class="card-body">
+<div class="row">
+    {% regroup achievements|dictsort:"achievement.level_required" by achievement.level_required as achievement_list %}
+    {% for level in achievement_list %}
+        <h4 class="col-12 mt-3">Nivel {{ level.grouper }}</h4>
+        {% for user_achievement in level.list %}
+            <div class="col-md-4 mb-3">
+                <div class="card-header" style="color: rgb(2, 101, 222);">
+                    <div class="card-body text-center">
+                        <i class="{{ user_achievement.achievement.icon }} achievement-icon" data-bs-toggle="tooltip" title="{{ user_achievement.achievement.description }}"></i>
+                        <h5 class="card-title">{{ user_achievement.achievement.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% empty %}
+        <p>Aún no has desbloqueado ningún logro.</p>
+    {% endfor %}
+</div>
+</div>
+</div>
+{% endblock %}

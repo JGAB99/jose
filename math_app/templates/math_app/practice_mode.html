@@ -1,0 +1,23 @@
+{% extends 'math_app/base.html' %}
+
+{% block content %}
+<div class="card">
+
+    <div class="card-header">
+        <h2>Modo Práctica</h2>
+    </div>
+    <div class="body">
+        <p>{{ exercise.question }}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+            <button type="submit" class="btn btn-primary">Enviar respuesta</button>
+        </form>
+
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+
+        
+    </div>
+</div>
+{% endblock %}
